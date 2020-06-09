@@ -1,10 +1,10 @@
 FROM node:12-alpine
 
-ARG FILE='linux-x64-72_binding.node'
 # Install node-sass
+ARG FILE='linux-x64-72_binding.node'
 RUN \
   mkdir /opt/node-sass/ && \
-  wget https://github.com/sass/node-sass/releases/download/v4.13.0/$FILE -O /opt/node-sass/$FILE
+  wget https://github.com/sass/node-sass/releases/download/v4.14.1/$FILE -O /opt/node-sass/$FILE
 
 ENV SASS_BINARY_PATH=/opt/node-sass/$FILE
 
