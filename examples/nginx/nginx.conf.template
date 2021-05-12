@@ -1,0 +1,26 @@
+server {
+  listen 8080 default_server;
+  listen [::]:8080 default_server;
+
+  root /usr/share/nginx/html;
+  index index.html;
+  server_name _;
+
+  gzip on;
+  gzip_types text/plain application/xml application/javascript text/css text/javascript;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+
+  location /api/ {
+      proxy_pass                         ${SERVER_HOST};
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header Host              $host;
+      proxy_set_header X-Real-IP         $remote_addr;
+  }
+
+  location ~* \.(css|js|ico|xml)$ {
+    expires 5d;
+  }
+}

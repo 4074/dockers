@@ -48,14 +48,22 @@ A project structure likes
 
 Dockfile
 ```dockerfile
-FROM 4074/pm2-builder:12-alpine
-WORKDIR /project
-COPY app/ /project/app/
-COPY server/ /project/server/
-EXPOSE 5420
-WORKDIR /project/app
-RUN npm install && npm run build
-WORKDIR /project/server
-RUN npm install && npm run build
+FROM 4074/pm2-builder:12-alpine-git-sass4.14.1
+
+WORKDIR /www
+COPY app/ /www/app/
+COPY server/ /www/server/
+
+WORKDIR /www/app
+RUN npm install --registry=https://registry.npm.taobao.org
+RUN npm run build
+RUN rm -rf node_modules
+
+WORKDIR /www/server
+RUN npm install --registry=https://registry.npm.taobao.org
+RUN npm run build
+
+EXPOSE 8080
+
 CMD [ "pm2-runtime", "start", "pm2.config.js" ]
 ```

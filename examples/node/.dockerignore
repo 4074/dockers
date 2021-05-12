@@ -1,0 +1,14 @@
+.git
+notebooks
+unused
+Dockerfile
+.DS_Store
+.gitignore
+README.md
+env.*
+
+.idea
+.vscode
+.csvs
+
+node_modules
