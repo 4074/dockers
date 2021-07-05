@@ -1,16 +1,16 @@
-FROM node:14.17-alpine
+FROM node:14-alpine
 
 # Install
 RUN apk add --no-cache \
     git
 
 # Install node-sass
-ARG FILE='linux-x64-72_binding.node'
-RUN \
-  mkdir /opt/node-sass/ && \
-  wget https://github.com/sass/node-sass/releases/download/v4.14.1/$FILE -O /opt/node-sass/$FILE
+# ARG FILE='linux-x64-79_binding.node'
+# RUN \
+#   mkdir /opt/node-sass/ && \
+#   wget https://github.com/sass/node-sass/releases/download/v4.14.1/$FILE -O /opt/node-sass/$FILE
 
-ENV SASS_BINARY_PATH=/opt/node-sass/$FILE
+# ENV SASS_BINARY_PATH=/opt/node-sass/$FILE
 
 # Install pm2
 RUN npm install pm2 -g
